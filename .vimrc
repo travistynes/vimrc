@@ -14,6 +14,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'https://github.com/tommcdo/vim-fubitive.git'
+Plugin 'universal-ctags/ctags'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
