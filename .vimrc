@@ -55,5 +55,5 @@ let mapleader = " "
 
 " Grep for word under cursor, don't go to first match (grep!) and open the
 " quickfix list at the bottom.
-:nnoremap <leader>f :grep! -rnwI --exclude=tags -e "<C-R><C-W>" . <CR> :bo cw<CR>
+:nnoremap <leader>f :grep! -rnwI --exclude=tags --exclude-dir={target,logs} -e "<C-R><C-W>" . <CR> :bo cw<CR>
 
