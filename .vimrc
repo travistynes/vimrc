@@ -11,10 +11,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic' " Syntastic linting causes slow saves (:w)
+"Plugin 'https://github.com/w0rp/ale' " Trying ALE for linting.
 Plugin 'bling/vim-airline'
 Plugin 'https://github.com/tommcdo/vim-fubitive.git'
 Plugin 'universal-ctags/ctags'
+Plugin 'https://github.com/ervandew/supertab.git'
+Plugin 'https://github.com/scrooloose/nerdtree.git'
+Plugin 'https://github.com/vim-scripts/taglist.vim.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -35,6 +39,7 @@ syntax on
 set hidden
 set number
 set ignorecase
+set tw=0 " Disable inserting a newline on word wrap.
 set hlsearch
 set wildmenu
 set wildmode=list
@@ -42,6 +47,12 @@ set wildmode=list
 " Set leader
 :nnoremap <SPACE> <Nop>
 let mapleader = " "
+
+" Open nerd tree
+:nnoremap <leader>t :NERDTreeToggle<CR>
+
+" Toggle tag list
+:nnoremap <leader>m :TlistToggle<CR>
 
 " Switch buffers with buf# <leader>n
 :nnoremap <leader>n <C-^> 
@@ -57,3 +68,22 @@ let mapleader = " "
 " quickfix list at the bottom.
 :nnoremap <leader>f :grep! -rnwI --exclude=tags --exclude-dir={target,logs} -e "<C-R><C-W>" . <CR> :bo cw<CR>
 
+" Go to definition of word under cursor.
+:nnoremap <leader>] <C-]>
+
+" Pop tag stack
+:nnoremap <leader>[ <C-t>
+
+" Auto format current file using Eclipse
+" See https://help.eclipse.org/luna/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftasks-231.htm
+:nnoremap <leader>ff :!eclipse -application org.eclipse.jdt.core.JavaCodeFormatter -config ~/Documents/projects/mes-formatter.prefs %:p<CR>
+
+" Disable whitespace extension in airline statusline
+let g:airline#extensions#whitespace#enabled = 0
+
+" Only show tags in taglist for the current buffer
+let Tlist_Show_One_File = 1
+
+" ALE linter settings
+"let g:ale_lint_on_enter = 0 " Getting errors when opening vim session.
+"let g:airline#extensions#ale#enabled = 1 " Show lint errors / warnings in statusline.
